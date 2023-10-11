@@ -5,8 +5,6 @@
 #include <netdb.h>
 #include <stdlib.h>
 
-test_struct_t client_data;
-result_struct_t result;
 
 void set_up_tcp_client(char *server_ip, uint16_t server_port)
 {
@@ -38,35 +36,9 @@ void set_up_tcp_client(char *server_ip, uint16_t server_port)
     } else {
         std::cout << "Connected\n";
     }
-    
-    
-PROMT_USER:
-    
-    std::cout << "Enter a: ?" << std::endl;
-    std::cin >> &client_data.a;
-    printf("Enter b: ?\n");
-    std::cin >> &client_data.b;
-    
-    ret = sendto(sock_fd, &client_data,
-                 sizeof(test_struct_t),
-                 0,
-                 (struct sockaddr *)&server_det, addr_len);
-    
-    std::cout << "Number of bytes Sent = " << ret << std::endl;
-    
-    ret = recvfrom(sock_fd, (char *)&result,
-                   sizeof(result_struct_t),
-                   0,
-                   (struct sockaddr *)&server_det, &addr_len);
-    
-    
-    std::cout << "Number of bytes recvd = " << ret << std::endl;
-    
-    std::cout << "Result recvd = " << result.c << std::endl;
-    
-    goto PROMT_USER;
-}
 
+    return;    
+}
 int main(int argc, const char * argv[]) {
     
     if(argc != 3)
